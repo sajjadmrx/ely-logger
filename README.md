@@ -1,7 +1,7 @@
 
-# @intelika/logger
+# ely-logger
 
-Streamline your app's logging with @Intelika/logger, the ultimate tool for sending logs to Discord, Telegram, and beyond with just one line of code.
+Streamline your app's logging with ely-logger, the ultimate tool for sending logs to Discord, Telegram, and beyond with just one line of code.
 
 
 ## Installation
@@ -9,11 +9,11 @@ Use the package manager of your choice to install the package:
 
 npm:
 ```bash
-npm install @intelika/logger
+npm install ely-logger
 ```
 yarn:
 ```bash
-yarn add @intelika/logger
+yarn add ely-logger
 ```
 
 ## Emitters
@@ -31,7 +31,7 @@ the package can be used in any JavaScript or TypeScript project. Here are some e
 Nest.js
 ```typescript
 import { Module } from '@nestjs/common';
-import { LogModule } from '@intelika/logger';
+import { LogModule } from 'ely-logger';
 
 @Module({
     imports: [
@@ -48,7 +48,7 @@ export class AppModule {}
 // cats.service.ts
 
 import { Injectable } from '@nestjs/common';
-import { LogService } from '@intelika/logger';
+import { LogService } from 'ely-logger';
 
 @Injectable()
 export class CatsService {
@@ -70,7 +70,7 @@ export class CatsService {
 
 everywhere else
 ```typescript
-import { LogService, Emitter } from '@intelika/logger';
+import { LogService, Emitter } from 'ely-logger';
 
 const logger = new LogService('myContext');
 

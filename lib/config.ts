@@ -1,4 +1,4 @@
-export const PACKAGE_NAME = '@intelika/logger'
+export const PACKAGE_NAME = 'ely-logger'
 export const consoleColors = {
   red: '\x1b[31m',
   yellow: '\x1b[33m',

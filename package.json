@@ -1,5 +1,5 @@
 {
-  "name": "@intelika/logger",
+  "name": "ely-logger",
   "version": "1.2.0",
   "main": "./dist/index.js",
   "scripts": {
@@ -13,12 +13,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/intelika-ai/intelika-logger"
+    "url": "https://github.com/sajjadmrx/ely-logger"
   },
-  "author": "intelika-ai",
+  "author": "sajjadmrx",
   "license": "MIT",
   "dependencies": {
     "@nestjs/common": "10.3.3",
+    "@sentry/node": "8.42.0",
     "reflect-metadata": "0.2.1",
     "rxjs": "7.8.1",
     "stream": "0.0.2"
@@ -46,15 +47,15 @@
   "directories": {
     "lib": "lib"
   },
-  "description": "Nestjs logger module designed by intelika-ai team",
+  "description": "simple and easy to use logger.",
   "keywords": [
     "nestjs",
     "logger",
-    "intelika-ai",
     "logger-module",
-    "intelika-logger",
-    "intelika",
     "logging",
-    "nest utility"
+    "nest utility",
+    "nodejs",
+    "express",
+    "sentry"
   ]
 }

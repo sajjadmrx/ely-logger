@@ -14,5 +14,5 @@
         "smartLists": true,
         "smartypants": false
     },
-    "name": "@intelika/logger",
+    "name": "ely-logger",
 }
