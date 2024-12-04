@@ -1,4 +1,4 @@
-import { Emitter, LogService } from '../..'
+import { Emitter, LogService } from '../../dist'
 
 const logService = new LogService('TestContext', {
   file: {
