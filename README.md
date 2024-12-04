@@ -1,8 +1,8 @@
 
 # ely-logger
 
-Streamline your app's logging with ely-logger, the ultimate tool for sending logs to Discord, Telegram, and beyond with just one line of code.
 
+ely-logger is a simple and lightweight logging library for Node.js that allows you to send logs to Discord, Telegram, and other services with just one line of code. It supports multiple emitters, including the console, file, Discord, Telegram, and more. It's easy to use and can be integrated into any Node.js project with minimal effort.
 
 ## Installation
 Use the package manager of your choice to install the package:
@@ -21,6 +21,7 @@ yarn add ely-logger
 - [Telegram](./lib/log/emitters/telegram.emitter.ts)
 - [Discord Webhook](./lib/log/emitters/discord.emitter.ts)
 - [Console](./lib/log/emitters/console.emitter.ts)
+- [Sentry](./lib/log/emitters/sentry.emitter.ts)
 
 ## Usage
 the package can be used in any JavaScript or TypeScript project. Here are some examples of how to use it in different environments.

@@ -12,7 +12,8 @@ export enum Emitter {
   'DISCORD' = 'DISCORD',
   'TELEGRAM' = 'TELEGRAM',
   'CONSOLE' = 'CONSOLE',
-  'FILE' = 'FILE'
+  'FILE' = 'FILE',
+  'SENTRY' = 'SENTRY'
 }
 
 /**

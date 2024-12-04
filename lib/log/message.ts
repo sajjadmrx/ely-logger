@@ -4,6 +4,7 @@ import discordEmitter from './emitters/discord.emitter'
 import telegramEmitter from './emitters/telegram.emitter'
 import { Options } from './interfaces/option.interface'
 import fileEmitter from './emitters/file.emitter'
+import SentryEmitter from './emitters/sentry.emitter'
 type LogLevel = 'WARN' | 'INFO' | 'ERROR'
 
 export class Message {
@@ -32,8 +33,10 @@ export class Message {
       CONSOLE: consoleEmitter,
       DISCORD: discordEmitter,
       TELEGRAM: telegramEmitter,
-      FILE: fileEmitter
+      FILE: fileEmitter,
+      SENTRY: SentryEmitter
     }
+
     const emitterFunc = emitters[emitter]
     if (!emitterFunc) {
       throw new Error('Invalid emitter')
