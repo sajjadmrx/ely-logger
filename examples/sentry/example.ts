@@ -1,19 +1,18 @@
-import * as Sentry from '@sentry/node'
 import { Emitter, LogService } from '../../dist'
 
-Sentry.init({
-  dsn: process.env.SENTRY_DNS,
-  environment: 'production',
-  tracesSampleRate: 1.0,
-  integrations: [Sentry.nestIntegration()]
+const logger = new LogService('my-app', {
+  sentry: {
+    dsn: 'https://sentry.io/123456',
+    tracesSampleRate: 1,
+    environment: 'production'
+  }
 })
-const logger = new LogService('my-app')
 
 async function main() {
   try {
     await fetchTodos()
   } catch (error) {
-    logger.error(error).into(Emitter.SENTRY)
+    logger.error(error).into(Emitter.SENTRY).into(Emitter.CONSOLE)
   }
 }
 

@@ -16,6 +16,9 @@
  * }
  */
 
+/**
+ * Options for configuring the logger.
+ */
 export interface Options {
   /**
    * The Discord webhook URL.
@@ -23,6 +26,7 @@ export interface Options {
    * @example 'https://discord.com/api/webhooks/...'
    */
   discordWebhook?: string
+
   /**
    * Options for the Telegram bot.
    * @property token - The token for the Telegram bot.
@@ -57,6 +61,20 @@ export interface Options {
       | 'DATE - CONTEXT | MESSAGE'
       | 'DATE | MESSAGE'
       | 'DATE - MESSAGE'
+  }
+
+  /**
+   * Options for Sentry integration.
+   * @property dsn - The Data Source Name for Sentry.
+   * @property integrations - An array of integrations for Sentry. [optional]
+   * @property tracesSampleRate - The sample rate for tracing.
+   * @property environment - The environment name.
+   */
+  sentry?: {
+    dsn: string
+    integrations?: any[]
+    tracesSampleRate: number
+    environment: string
   }
 }
 
