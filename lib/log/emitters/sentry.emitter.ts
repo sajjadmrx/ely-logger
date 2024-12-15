@@ -15,12 +15,25 @@ const SentryEmitter = (options: Options, level: LogLevel, context: string, ...ms
     tracesSampleRate: options.sentry.tracesSampleRate,
     environment: process.env.NODE_ENV
   })
-
   msg.map(m => {
-    if (typeof m === 'string') {
-      Sentry.captureMessage(m, level.toLowerCase() as any)
+    if (level === 'ERROR') {
+      if (typeof m === 'string') {
+        Sentry.captureMessage(m, level.toLowerCase() as any)
+      } else {
+        Sentry.setExtra('error', m)
+        if (m && m.isAxiosError) {
+          Sentry.setExtra('axios', {
+            method: m.config.method,
+            url: m.config.url,
+            status: m.response?.status,
+            statusText: m.response?.statusText,
+            response: m.response?.data || m.response?.statusText
+          })
+        }
+        Sentry.captureException(m)
+      }
     } else {
-      Sentry.captureException(m)
+      Sentry.captureMessage(JSON.stringify(m), level.toLowerCase() as any)
     }
   })
 }
