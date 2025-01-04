@@ -22,9 +22,10 @@ const SentryEmitter = (options: Options, level: LogLevel, context: string, ...ms
       } else {
         Sentry.setExtra('error', m)
         if (m && m.isAxiosError) {
+          const fullUrl = m.config.baseURL + m.config.url
           Sentry.setExtra('axios', {
             method: m.config.method,
-            url: m.config.url,
+            url: fullUrl,
             status: m.response?.status,
             statusText: m.response?.statusText,
             response: m.response?.data || m.response?.statusText
