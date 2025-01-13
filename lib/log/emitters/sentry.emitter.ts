@@ -32,6 +32,10 @@ const SentryEmitter = (options: Options, level: LogLevel, context: string, ...ms
           })
         }
         Sentry.captureException(m)
+
+        // clean up
+        Sentry.setExtra('error', undefined)
+        Sentry.setExtra('axios', undefined)
       }
     } else {
       Sentry.captureMessage(JSON.stringify(m), level.toLowerCase() as any)
