@@ -40,6 +40,21 @@ import { LogModule } from 'ely-logger';
             isGlobal: true,
             discordWebhook:  'https://discord.com/api/webhooks/...' // optional
         }),
+        // or:
+      LogModule.forRootAsync({
+			    isGlobal: true,
+			    inject: [ConfigService],
+		    	useFactory(configService: ConfigService<VariablesType>) {
+			    	return {
+			    		sentry: {
+						    dsn: configService.get('SENTRY_DSN'),
+						    environment: configService.get('NODE_ENV'),
+						    tracesSampleRate: 1.0,
+						    integrations: [Sentry.nestIntegration()],
+				    	},
+				}
+			},
+		}),
     ],
   providers: [],
   exports: [],
@@ -73,24 +88,23 @@ everywhere else
 ```typescript
 import { LogService, Emitter } from 'ely-logger';
 
-const logger = new LogService('myContext');
+let logger = new LogService('myContext');
 
 // --- OR --- 
 
-// const logger = new LogService({
-//   context: 'myContext',
-//   discordWebhook: 'https://discord.com/api/webhooks/...'
-// })
+logger = new LogService({
+  context: 'myContext',
+  discordWebhook: 'https://discord.com/api/webhooks/...'
+})
 
-// const logger = new LogService({
-//   telegram: {
-//     chatId: '1234567890',
-//     token: '1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11'
-//   },
-//   context: 'myContext'
-// })
+logger = new LogService({
+  telegram: {
+    chatId: '1234567890',
+    token: '1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11'
+  },
+  context: 'myContext'
+})
 
-// const logger = new LogService(bootstrap.name)
 
 // Log a message to the console
 logger.log('Hello, world!').into(Emitter.CONSOLE);
@@ -102,6 +116,7 @@ logger.warn('Something might be wrong...').into(Emitter.DISCORD);
 logger.error('Something went wrong!').into(Emitter.TELEGRAM);
 ```
 
+## how to use the emitters?
 > [!TIP]
 > ```ts
 >  const logger = new LogService({
@@ -135,6 +150,42 @@ logger.error('Something went wrong!').into(Emitter.TELEGRAM);
 >})
 >```
 > you can use the file emitter by providing the path of the file, the file format, and the message format.
+
+> [!TIP]
+> ```ts
+> const logService = new LogService('TestContext', {})
+> const logger = new LogService('my-app', {
+>  sentry: {
+>    dsn: 'https://sentry.io/123456...',
+>    tracesSampleRate: 1,
+>    environment: 'production',
+>    integrations: [Sentry.httpIntegration()],
+>  }
+>})
+>
+>   logger
+>      .error(
+>        buildSentryPayload({
+>          contentOrError: error,
+>          user: {
+>            id: 1
+>          },
+>          contexts: {
+>            myContext: {
+>              id: 1,
+>              name: 'myContext',
+>              type: 'myType',
+>              version: '1.0.0'
+>            }
+>          }
+>        })
+>      )
+>      .into(Emitter.SENTRY)
+> //or:
+> logger.warn('Something might be wrong...').into(Emitter.SENTRY);
+> ```
+> you can use the sentry emitter by providing the dsn of your project, the tracesSampleRate, the environment, and the integrations.
+
 
 ## Examples
 you can find more examples in the [examples](./examples) directory.
@@ -185,6 +236,7 @@ The package supports the following emitters:
 - DISCORD: Sends the message to a Discord channel.
 - TELEGRAM: Sends the message to a Telegram chat.
 - FILE: Logs the message to a file.
+- SENTRY: Sends the message to Sentry.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
