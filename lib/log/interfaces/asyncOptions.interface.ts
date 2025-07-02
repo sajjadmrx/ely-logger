@@ -11,6 +11,7 @@ import { NestOptions, Options } from './option.interface'
  *    return {
  *          discordWebhook: 'https://discord.com/api/webhooks/...',
  *          telegram: { token: '...', chatId: '123456789' },
+ *          mattermost: { token: 'xxxx-yyyy-zzz', server: 'https://xxx.yyy.com', channelId: 'channel_id' },
  *          isGlobal: true
  *       }
  *  },
@@ -19,7 +20,7 @@ import { NestOptions, Options } from './option.interface'
  */
 
 export interface AsyncOptions extends NestOptions {
-  useFactory?: (...args: any[]) => Promise<Options> | Options
+	useFactory?: (...args: any[]) => Promise<Options> | Options
 
-  inject?: any[]
+	inject?: any[]
 }

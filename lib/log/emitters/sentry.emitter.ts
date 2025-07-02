@@ -53,7 +53,7 @@ const SentryEmitter = (options: Options, level: LogLevel, context: string, ...ms
 
 			if (level === 'ERROR') {
 				scope.setExtra('error', m)
-				if (m && m.isAxiosError) {
+				if (m?.isAxiosError) {
 					const fullUrl = m.config.baseURL + m.config.url
 					scope.setExtra('axios', {
 						method: m.config.method,
