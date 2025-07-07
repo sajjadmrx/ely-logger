@@ -1,6 +1,6 @@
 {
   "name": "ely-logger",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "./dist/index.js",
   "scripts": {
     "build:lib": "tsc -p tsconfig.lib.json",
